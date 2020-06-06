@@ -1,37 +1,40 @@
-const bcrypt = require("bcrypt");
-
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "user",
-    {
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      password: {
-        type: DataTypes.TEXT,
-        allowNull: false
-      }
-    },
-    {
-      underscored: true,
-      freezeTableName: true
-    }
-  );
+    const Employee = sequelize.define(
+        "user",
+        {
+            full_name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            time_worked: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            wage: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            total_time: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            total_earnings: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            }
+        },
+        {
+            freezeTableName: true
+        }
+    );
 
-  User.generateHash = password => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
-  };
+    Employee.associate = (models) => {
+        Employee.belongsTo(models.account, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
-  User.validPassword = (inputPwd, dbPwd) => {
-    return bcrypt.compareSync(inputPwd, dbPwd);
-  };
-
-  User.associate = models => {
-    User.hasMany(models.history, {
-      onDelete: "cascade"
-    });
-  };
-
-  return User;
+    return Employee;
 };

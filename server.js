@@ -1,11 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const Handlebars = require("handlebars");
 const exphbs = require("express-handlebars");
 const { allowInsecurePrototypeAccess } = require("@handlebars/allow-prototype-access");
-const authController = require("./controller/auth-controller");
-const userController = require("./controller/user-controller");
-const historyController = require("./controller/history-controller");
+const controller=require('./controller/')
 
 const db = require("./models");
 
@@ -27,9 +24,8 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-app.use(authController);
-app.use(userController);
-app.use(historyController);
+app.use(controller);
+
 
 const syncOptions = { force: false };
 

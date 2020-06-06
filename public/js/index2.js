@@ -17,6 +17,7 @@ let clockInTime;
 let clockOutTime;
 let clickedClockOut = false;
 let timerCount = 0;
+const wage;
 let now = moment();
 displayTimeTimer();
 currentTimeTimer();
@@ -54,6 +55,10 @@ function displayLapsedTime() {
         }
     }
 
+}
+
+function displayEarnings(){
+    let earnings = (wage/3600)*totalSeconds;
 }
 
 function displayTimeTimer() {
