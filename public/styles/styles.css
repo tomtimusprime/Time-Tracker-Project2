@@ -1,12 +1,18 @@
-
-
 .list-group-item {
   line-height: 2.5;
 }
+body {
+  color:#B7410E ;
+}
 .jumbotron {
-  color: #B7410E;
+  /* color: #B7410E; */
   padding: 0px; 
 }
+
+/* .form-group {
+  text-align: center;
+} */
+
  #time-piece {
    width: 100%;
    padding: 0px;
@@ -22,7 +28,6 @@ img {
 
 .box1{
   width: 100%;
-  /* padding-left: -125px; */
   position: relative;
   top: 0px;
   left: 0px;
@@ -45,6 +50,6 @@ h2, .btn {
 
 h1 {
   text-align: center;
-  color: #B7410E;
+  /* color: #B7410E; */
   font-weight: bolder;
 }
