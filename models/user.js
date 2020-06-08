@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const Employee = sequelize.define(
-        "employee",
+    const User = sequelize.define(
+        "user",
         {
             full_name: {
                 type: DataTypes.STRING,
@@ -24,17 +24,18 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
-            freezeTableName: true
+            freezeTableName: true,
+            timestamps: false
         }
     );
 
-    Employee.associate = (models) => {
-        Employee.belongsTo(models.account, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
+    // User.associate = (models) => {
+    //     User.belongsTo(models.account, {
+    //         foreignKey: {
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
-    return Employee;
+    return User;
 };
