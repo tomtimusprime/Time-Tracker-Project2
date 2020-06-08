@@ -5,15 +5,18 @@
   <title>Time Tracker 3000 Signup</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="./Assets/Images/clock_favicon.png" type="image/x-icon/">
+  <link rel="icon" href="Assets/Images/clock_favicon.png" type="image/x-icon/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="./styles/styles.css" rel="stylesheet">
+  <link href="styles/styles.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/signup.js"></script>
+  
 </head>
 
 <body>
   <div class="jumbotron">
     <div class="box1">
-      <img src="Assets/Images/european-timepiece-background.jpg" alt="time piece" id="timePiece" /><br>
+      <img src="/Assets/Images/european-timepiece-background.jpg" alt="time piece" id="timePiece" /><br>
       <div class="text">
         <h1>Time Tracker 3000</h1>
       </div>
@@ -25,12 +28,12 @@
         <form class="signup">
           <div class="form-group">
             <h2>Please Sign Up</h2>
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email">
+            <label for="emailInput">Email address</label>
+            <input type="email" class="form-control" id="emailInput" placeholder="Email">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password">
+            <label for="passwordInput">Password</label>
+            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
           </div>
           <div style="display: none" id="alert" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -43,10 +46,6 @@
       </div>
     </div>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/signup.js"></script>
-
 </body>
 
 </html>
