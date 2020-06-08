@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    Account.associate = (models) => {
-        Account.hasOne(models.employee, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
+    // Account.associate = (models) => {
+    //     Account.hasOne(models.employee, {
+    //         foreignKey: {
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
     return Account;
 };
