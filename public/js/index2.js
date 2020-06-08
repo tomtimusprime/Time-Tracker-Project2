@@ -17,7 +17,7 @@ let clockInTime;
 let clockOutTime;
 let clickedClockOut = false;
 let timerCount = 0;
-const wage;
+let wage;
 let now = moment();
 displayTimeTimer();
 currentTimeTimer();
@@ -29,13 +29,13 @@ function displayLapsedTime() {
     const hoursLabel = document.querySelector("#hours");
     var minutesLabel = document.getElementById("minutes");
     var secondsLabel = document.getElementById("seconds");
-    if(totalSeconds !== 0) {
+    if (totalSeconds !== 0) {
         totalSeconds = resumeClockInTime;
     }
     timer = setInterval(setTime, 1000);
 
     function setTime() {
-        if(breakTime === true || clickedClockOut === true) {
+        if (breakTime === true || clickedClockOut === true) {
             resumeClockinTime = totalSeconds;
             console.log(resumeClockInTime);
             clearInterval(timer);
@@ -57,8 +57,8 @@ function displayLapsedTime() {
 
 }
 
-function displayEarnings(){
-    let earnings = (wage/3600)*totalSeconds;
+function displayEarnings() {
+    let earnings = (wage / 3600) * totalSeconds;
 }
 
 function displayTimeTimer() {
@@ -92,8 +92,50 @@ clockOutBtn.addEventListener("click", function (e) {
 
 })
 
-breakBtn.addEventListener("click", (e)=> {
+breakBtn.addEventListener("click", (e) => {
 
 })
+
+// Make sure we wait to attach our handlers until the DOM is fully loaded.
+const addUser = async (name, wage) => {
+    let newUser = {
+        full_name: name,
+        time_worked: 0,
+        wage: wage,
+        total_time: 0,
+        total_earnings: 0
+    }
+    await
+        $.ajax("/api/cats/" + id, {
+            type: "POST",
+            data: newUser
+        }).then(
+            function () {
+                console.log("Added user: ", newUser);
+                location.reload();
+            }
+        );
+}
+
+const updateUser = async (timeWorked, totalTime, totalEarnings) => {
+    var newUserData = {
+        time_worked: timeWorked,
+        total_time: totalTime,
+        total_earnings: totalEarnings
+    };
+
+    await
+        $.ajax("/api/cats/" + id, {
+            type: "PUT",
+            data: newUserData
+        }).then(
+            function () {
+                console.log("Updated user data: ", newUserData);
+
+                location.reload();
+            }
+        );
+}
+
 
 
