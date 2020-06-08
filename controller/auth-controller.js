@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const router = express.Router();
 const db = require("../models");
 const jwtSecret = require("../config/jwt-config");
+const path = require("path");
 
 // Flash
 router.use(
@@ -28,14 +29,16 @@ router.use(cookieParser());
 
 router.get("/", (req, res) => {
   if (req.user) {
-    res.render("index", { user: req.user });
+    res.sendFile(path.join(__dirname, "../views/login.html"));
+    // res.render("index", { user: req.user });
   } else {
     res.redirect("/login");
   }
 });
 
 router.get("/login", (req, res) => {
-  res.render("login", { message: req.flash("error") });
+  res.sendFile(path.join(__dirname, "../views/login.html"));
+  // res.render("login", { message: req.flash("error") });
 });
 
 router.post(
@@ -64,7 +67,7 @@ router.post(
 );
 
 router.get("/signup", (req, res) => {
-  res.render("signup", { message: req.flash("error") });
+  res.sendFile(path.join(__dirname, "../views/signup.html"));
 });
 
 router.post(
