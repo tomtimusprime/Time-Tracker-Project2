@@ -1,3 +1,4 @@
+$(document).ready(function() {
 const addUser = async (name, wage) => {
     let newUser = {
         full_name: name,
@@ -40,3 +41,4 @@ const updateUser = async (timeWorked, totalTime, totalEarnings) => {
 
 exports.addUser = addUser;
 exports.updateUser = updateUser;
+});
