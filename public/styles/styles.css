@@ -14,9 +14,10 @@ body {
 } */
 
  #time-piece {
-   width: 100%;
+   font-size: xx-small;
+   /* width: 100%;
    padding: 0px;
-   border-left: 0px;
+   border-left: 0px; */
  }
 
 img {

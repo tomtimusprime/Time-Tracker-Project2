@@ -37,8 +37,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/login.html"));
-  // res.render("login", { message: req.flash("error") });
+   res.sendFile(path.join(__dirname, "../views/login.html"));
 });
 
 router.post(

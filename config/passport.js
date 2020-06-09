@@ -4,12 +4,12 @@ const jwtSecret = require("./jwt-config");
 const db = require("../models");
 
 module.exports = passport => {
-  passport.serializeUser((user, cb) => {
-    cb(null, user.id);
+  passport.serializeUser((account, cb) => {
+    cb(null, account.id);
   });
 
   passport.deserializeUser(async (id, cb) => {
-    const data = await db.user.findOne({ where: { id: id } });
+    const data = await db.account.findOne({ where: { id: id } });
 
     cb(null, data);
   });
@@ -23,16 +23,16 @@ module.exports = passport => {
         session: true
       },
       async (email, password, cb) => {
-        let data = await db.user.findOne({ where: { email: email } });
+        let data = await db.account.findOne({ where: { email: email } });
 
         if (data) {
           return cb(null, false, {
             message: "Oops! Email already signed-up."
           });
         } else {
-          data = await db.user.create({
+          data = await db.account.create({
             email: email,
-            password: db.user.generateHash(password)
+            password: db.account.generateHash(password)
           });
 
           const record = {
@@ -57,12 +57,12 @@ module.exports = passport => {
         session: false
       },
       async (email, password, cb) => {
-        let data = await db.user.findOne({ where: { email: email } });
+        let data = await db.account.findOne({ where: { email: email } });
 
         if (!data) {
           return cb(null, false, { message: "No email found." });
         }
-        if (!db.user.validPassword(password, data.password)) {
+        if (!db.account.validPassword(password, data.password)) {
           return cb(null, false, { message: "Oops! Wrong password!" });
         }
 
@@ -88,7 +88,7 @@ module.exports = passport => {
   passport.use(
     "jwt",
     new JwtStrategy(opts, async (jwtpayload, cb) => {
-      const data = await db.user.findOne({ id: jwtpayload.sub });
+      const data = await db.account.findOne({ id: jwtpayload.sub });
 
       if (data) {
         return cb(null, data);
