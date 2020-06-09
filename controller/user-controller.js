@@ -42,7 +42,7 @@ router.get(
 
 router.get("/api/users/:id", async (req, res) => {
   try {
-    const data = await db.user.findAll({ where: { id: req.params.id }, include: [db.history] });
+    const data = await db.account.findAll({ where: { id: req.params.id }, include: [db.history] });
 
     res.json(data);
   } catch (error) {
@@ -56,7 +56,7 @@ router.post(
   "/api/users",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    const data = await db.user.create(req.body);
+    const data = await db.account.create(req.body);
 
     res.json(data);
   }
@@ -67,7 +67,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const data = await db.user.destroy({ where: { id: req.params.id } });
+      const data = await db.account.destroy({ where: { id: req.params.id } });
 
       res.json(data);
     } catch (error) {

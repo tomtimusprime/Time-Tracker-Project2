@@ -3,13 +3,13 @@ const router = express.Router();
 const db = require("../models");
 
 router.get("/api/histories", async (req, res) => {
-  const data = await db.history.findAll({ include: [db.user] });
+  const data = await db.history.findAll({ include: [db.account] });
 
   res.json(data);
 });
 
 router.get("/api/histories/:id", async (req, res) => {
-  const data = await db.history.findAll({ where: { id: req.params.id }, include: [db.user] });
+  const data = await db.history.findAll({ where: { id: req.params.id }, include: [db.account] });
 
   res.json(data);
 });
