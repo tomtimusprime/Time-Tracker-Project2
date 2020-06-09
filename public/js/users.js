@@ -8,7 +8,7 @@ const addUser = async (name, wage) => {
         total_earnings: 0
     }
     await
-        $.ajax("/api/users/" + id, {
+        $.ajax("/api/users", {
             type: "POST",
             data: newUser
         }).then(
@@ -19,7 +19,7 @@ const addUser = async (name, wage) => {
         );
 }
 
-const updateUser = async (timeWorked, totalTime, totalEarnings) => {
+const updateUser = async (id, timeWorked, totalTime, totalEarnings) => {
     var newUserData = {
         time_worked: timeWorked,
         total_time: totalTime,
