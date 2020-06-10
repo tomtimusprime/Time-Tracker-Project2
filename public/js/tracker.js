@@ -8,7 +8,7 @@ const clockOutTimeEl = document.querySelector("#clock-out-time");
 const currentTimeEl = document.querySelector("#current-time");
 currentTimeEl.textContent = "Current Time: " + moment().format("h:mm:ss A");
 const timeClockedInEl = document.querySelector("#time-clocked-in");
-const users = require('./users');
+const users = require("./users");
 
 let breakTime = false;
 let resumeClockInTime;

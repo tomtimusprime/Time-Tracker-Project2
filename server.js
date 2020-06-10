@@ -3,7 +3,6 @@ const express = require("express");
 const user = require("./controller/user-controller.js");
 const authorize = require("./controller/auth-controller.js");
 const history = require("./controller/history-controller.js");
-const controller=require("./controller/user-controller");
 
 
 const db = require("./models");
@@ -16,16 +15,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 
-
-
 app.use(user);
 app.use(authorize);
 app.use(history);
-
-
-
-app.use(controller);
-
 
 const syncOptions = { force: false };
 
