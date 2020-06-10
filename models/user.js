@@ -29,13 +29,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    // User.associate = (models) => {
-    //     User.belongsTo(models.account, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
+    User.associate = (models) => {
+        User.belongsTo(models.account, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
     return User;
 };

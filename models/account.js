@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
         {
             email: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true,
+                validate: {
+                    isEmail: true
+                }
             },
             password: {
                 type: DataTypes.STRING,
@@ -16,13 +20,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    // Account.associate = (models) => {
-    //     Account.hasOne(models.employee, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
+    Account.associate = (models) => {
+        Account.hasOne(models.user, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
     return Account;
 };
