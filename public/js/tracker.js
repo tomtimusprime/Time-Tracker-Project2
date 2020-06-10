@@ -82,7 +82,7 @@ clockInBtn.addEventListener("click", function (e) {
     clockOutBtn.disabled = false;
     breakBtn.disabled = false;
     displayLapsedTime();
-})
+});
 clockOutBtn.addEventListener("click", function (e) {
     clockOutTime = moment().format("hh:mm:ss");
     clockOutTimeEl.textContent = "    " + clockOutTime;
@@ -92,11 +92,11 @@ clockOutBtn.addEventListener("click", function (e) {
     clockOutBtn.disabled = true;
     users.updateUser(id, timeWorked, totalTime, totalEarnings);
 
-})
+});
 
 breakBtn.addEventListener("click", (e) => {
 
-})
+});
 
 
 

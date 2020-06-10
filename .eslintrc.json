@@ -9,21 +9,14 @@
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
-        "$": false
+        "$": false,
+        "console.log": false
     },
     "parserOptions": {
         "ecmaVersion": 2018
     },
     "rules": {
-        "no-console": [
-            "error",
-            {
-                "allow": [
-                    "warn",
-                    "error"
-                ]
-            }
-        ],
+        "no-console": "off",
         "quotes": [
             "error",
             "double"

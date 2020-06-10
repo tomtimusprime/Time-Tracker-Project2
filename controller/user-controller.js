@@ -29,7 +29,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const data = await db.user.findAll({ include: [db.history] });
+      const data = await db.user.findAll();
 
       res.json(data);
     } catch (error) {

@@ -9,8 +9,26 @@ body {
 .jumbotron {
   padding: 0px; 
   border: 0px;
+  background-color: transparent;
 }
 
+#dashboardH2{
+  text-align: center;
+}
+
+/* #first_name {
+  width: 350px;
+  column-width: 200px;
+} */
+
+#dashboard {
+  margin: auto;
+  width: 50%;
+}
+
+.user-container, #dashboard-table {
+  width: 100%;
+}
 
  #time-piece {
    font-size: xx-small;
@@ -40,8 +58,7 @@ img {
   background-color: transparent;
 }
 
-
-h2, .btn {
+h2, .btn, caption {
   color: #B7410E;
 }
 

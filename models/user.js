@@ -11,19 +11,19 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false
             },
             time_worked: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.DECIMAL(10,2),
                 allowNull: false
             },
             wage: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.DECIMAL(6,2),
                 allowNull: false
             },
             total_time: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.DECIMAL(10,2),
                 allowNull: false
             },
             total_earnings: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.DECIMAL(12,2),
                 allowNull: false
             }
         },

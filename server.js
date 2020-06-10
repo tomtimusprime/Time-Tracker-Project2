@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const user = require("./controller/user-controller.js");
 const authorize = require("./controller/auth-controller.js");
-const history = require("./controller/history-controller.js");
+const dashboard = require("./controller/dashboard-controller.js");
 
 
 const db = require("./models");
@@ -17,9 +17,10 @@ app.use(express.static("public"));
 
 app.use(user);
 app.use(authorize);
-app.use(history);
+app.use(dashboard);
 
-const syncOptions = { force: false };
+
+const syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
