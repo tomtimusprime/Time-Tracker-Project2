@@ -60,10 +60,14 @@ router.post(
       const token = jwt.sign(JSON.stringify(payload), jwtSecret.secret);
 
       res.cookie("jwt", token, { httpOnly: true, secure: false });
-      res.redirect("/");
+      res.redirect("/tracker");
     });
   }
 );
+
+router.get("/tracker", (req, res) => {
+  res.sendFile(path.join(__dirname, "../views/tracker.html"));
+})
 
 router.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "../views/signup.html"));

@@ -31,16 +31,18 @@ module.exports = passport => {
           });
         } else {
           data = await db.account.create({
+            first_name: "",
+            last_name: "",
             email: email,
-            password: db.account.generateHash(password)
+            password: await db.account.generateHash(password)
           });
 
-          const record = {
-            status: "SignUp",
-            userId: data.dataValues.id
-          };
+          // const record = {
+          //   status: "SignUp",
+          //   userId: data.dataValues.id
+          // };
 
-          data = await db.history.create(record);
+          // data = await db.history.create(record);
 
           return cb(null, data);
         }
@@ -52,8 +54,8 @@ module.exports = passport => {
     "local-login",
     new LocalStrategy(
       {
-        usernameField: "email",
-        passwordField: "password",
+        usernameField: "inputEmail",
+        passwordField: "inputPassword",
         session: false
       },
       async (email, password, cb) => {
@@ -66,12 +68,12 @@ module.exports = passport => {
           return cb(null, false, { message: "Oops! Wrong password!" });
         }
 
-        const record = {
-          status: "LogIn",
-          userId: data.id
-        };
+        // const record = {
+        //   status: "LogIn",
+        //   userId: data.id
+        // };
 
-        await db.history.create(record);
+        // await db.history.create(record);
 
         return cb(null, data);
       }

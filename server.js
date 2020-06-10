@@ -27,7 +27,7 @@ app.use(history);
 app.use(controller);
 
 
-const syncOptions = { force: true };
+const syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
