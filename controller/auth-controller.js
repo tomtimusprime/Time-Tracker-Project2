@@ -29,7 +29,7 @@ router.use(cookieParser());
 
 router.get("/", (req, res) => {
   if (req.user) {
-    res.sendFile(path.join(__dirname, "../views/login.html"));
+    res.sendFile(path.join(__dirname, "../public/login.html"));
     // res.render("index", { user: req.user });
   } else {
     res.redirect("/login");
@@ -37,7 +37,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-   res.sendFile(path.join(__dirname, "../views/login.html"));
+   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
 
 router.post(
@@ -66,11 +66,15 @@ router.post(
 );
 
 router.get("/tracker", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/tracker.html"));
-})
+  res.sendFile(path.join(__dirname, "../public/tracker.html"));
+});
+
+router.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/dashboard.html"));
+});
 
 router.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/signup.html"));
+  res.sendFile(path.join(__dirname, "../public/signup.html"));
 });
 
 router.post(

@@ -1,23 +1,37 @@
 .list-group-item {
   line-height: 2.5;
 }
+
 body {
   color:#B7410E ;
 }
+
 .jumbotron {
-  /* color: #B7410E; */
   padding: 0px; 
+  border: 0px;
+  background-color: transparent;
 }
 
-/* .form-group {
+#dashboardH2{
   text-align: center;
+}
+
+/* #first_name {
+  width: 350px;
+  column-width: 200px;
 } */
+
+#dashboard {
+  margin: auto;
+  width: 50%;
+}
+
+.user-container, #dashboard-table {
+  width: 100%;
+}
 
  #time-piece {
    font-size: xx-small;
-   /* width: 100%;
-   padding: 0px;
-   border-left: 0px; */
  }
 
 img {
@@ -44,13 +58,11 @@ img {
   background-color: transparent;
 }
 
-
-h2, .btn {
+h2, .btn, caption {
   color: #B7410E;
 }
 
 h1 {
   text-align: center;
-  /* color: #B7410E; */
   font-weight: bolder;
 }

@@ -8,7 +8,7 @@ const clockOutTimeEl = document.querySelector("#clock-out-time");
 const currentTimeEl = document.querySelector("#current-time");
 currentTimeEl.textContent = "Current Time: " + moment().format("h:mm:ss A");
 const timeClockedInEl = document.querySelector("#time-clocked-in");
-const users = require('./users');
+const users = require("./users");
 
 let breakTime = false;
 let resumeClockInTime;
@@ -82,7 +82,7 @@ clockInBtn.addEventListener("click", function (e) {
     clockOutBtn.disabled = false;
     breakBtn.disabled = false;
     displayLapsedTime();
-})
+});
 clockOutBtn.addEventListener("click", function (e) {
     clockOutTime = moment().format("hh:mm:ss");
     clockOutTimeEl.textContent = "    " + clockOutTime;
@@ -92,11 +92,11 @@ clockOutBtn.addEventListener("click", function (e) {
     clockOutBtn.disabled = true;
     users.updateUser(id, timeWorked, totalTime, totalEarnings);
 
-})
+});
 
 breakBtn.addEventListener("click", (e) => {
 
-})
+});
 
 
 
