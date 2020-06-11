@@ -3,6 +3,7 @@ const express = require("express");
 const user = require("./controller/user-controller.js");
 const authorize = require("./controller/auth-controller.js");
 const dashboard = require("./controller/dashboard-controller.js");
+const html = require("./controller/html-routes.js");
 
 
 const db = require("./models");
@@ -18,6 +19,7 @@ app.use(express.static("public"));
 app.use(user);
 app.use(authorize);
 app.use(dashboard);
+app.use(html);
 
 
 const syncOptions = { force: false };

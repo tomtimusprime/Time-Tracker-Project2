@@ -27,18 +27,7 @@ router.use(passport.session());
 
 router.use(cookieParser());
 
-router.get("/", (req, res) => {
-  if (req.user) {
-    res.sendFile(path.join(__dirname, "../public/login.html"));
-    // res.render("index", { user: req.user });
-  } else {
-    res.redirect("/login");
-  }
-});
 
-router.get("/login", (req, res) => {
-   res.sendFile(path.join(__dirname, "../public/login.html"));
-});
 
 router.post(
   "/login",
@@ -65,18 +54,6 @@ router.post(
   }
 );
 
-router.get("/tracker", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/tracker.html"));
-});
-
-router.get("/dashboard", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/dashboard.html"));
-});
-
-router.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/signup.html"));
-});
-
 router.post(
   "/signup",
   passport.authenticate("local-signup", {
@@ -91,8 +68,6 @@ router.get("/logout", async (req, res) => {
     status: "LogOut",
     userId: req.user.dataValues.id
   };
-
-  await db.history.create(record);
 
   req.logout();
   res.clearCookie("jwt");
