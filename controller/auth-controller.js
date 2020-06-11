@@ -12,7 +12,7 @@ const path = require("path");
 // Flash
 router.use(
   session({
-    cookie: { maxAge: 600000 },
+    cookie: { maxAge: 60000 },
     secret: "wootwoot",
     saveUninitialized: true,
     resave: true
