@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 const displayTime = document.querySelector("#displayTime");
 displayTime.textContent = moment().format("dddd, MMMM DD, YYYY hh:mm A");
 const clockInBtn = document.querySelector("#clock-in");
@@ -95,6 +97,8 @@ clockOutBtn.addEventListener("click", function (e) {
 });
 
 breakBtn.addEventListener("click", (e) => {
+
+});
 
 });
 

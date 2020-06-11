@@ -6,6 +6,15 @@ body {
   color:#B7410E ;
 }
 
+.navigation-bkgrd {
+  background-color: #B7410E ;
+  color: white !important;
+}
+
+nav {
+  color: white;
+}
+
 .jumbotron {
   padding: 0px; 
   border: 0px;
@@ -16,15 +25,26 @@ body {
   text-align: center;
 }
 
-/* #first_name {
-  width: 350px;
-  column-width: 200px;
-} */
+.navbar-brand{
+  width:"300px";
+  color:white;
+  font-weight: bold;
+  font-size: xx-large;
+}
 
-#dashboard {
+.nav-link {
+  color:white;
+}
+
+#signupContainer, #loginContainer {
+margin: auto;
+width: 50%;
+}
+/* #dashboard {
   margin: auto;
   width: 50%;
-}
+} */
+
 
 .user-container, #dashboard-table {
   width: 100%;
@@ -58,8 +78,13 @@ img {
   background-color: transparent;
 }
 
-h2, .btn, caption {
+h2, caption {
   color: #B7410E;
+}
+
+.btn {
+  color: white;
+  background-color: #B7410E ;
 }
 
 h1 {
