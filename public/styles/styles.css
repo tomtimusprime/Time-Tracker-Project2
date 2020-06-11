@@ -2,16 +2,15 @@
   line-height: 2.5;
 }
 
-body {
+body, h2, caption{
   color:#B7410E ;
 }
 
 .navigation-bkgrd {
   background-color: #B7410E ;
-  color: white !important;
 }
 
-nav {
+nav, .nav-link {
   color: white;
 }
 
@@ -26,25 +25,14 @@ nav {
 }
 
 .navbar-brand{
-  width:"300px";
   color:white;
   font-weight: bold;
-  font-size: xx-large;
-}
-
-.nav-link {
-  color:white;
 }
 
 #signupContainer, #loginContainer {
 margin: auto;
 width: 50%;
 }
-/* #dashboard {
-  margin: auto;
-  width: 50%;
-} */
-
 
 .user-container, #dashboard-table {
   width: 100%;
@@ -76,10 +64,6 @@ img {
   width: 100%;
   bottom: 125px;
   background-color: transparent;
-}
-
-h2, caption {
-  color: #B7410E;
 }
 
 .btn {

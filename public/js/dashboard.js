@@ -10,39 +10,6 @@ $(document).ready(function () {
 
     // Function for creating a new list row for authors
     function createUserRow(userData) {
-        // var dashboardTable;
-       $("#dashboardTable").DataTable({
-            "columns": [
-                // {
-                //     data: "id"
-                // },
-                // {
-                //     data: "first_name"
-                // },
-                // {
-                //     data: "last_name"
-                // },
-                // {
-                //     data: "time_worked"
-                // },
-        //         {
-        //             "data": "Wage",
-        //             "render": function (data, type, row) {
-        //                 return formatNumber(data);
-        //             }
-        //         },
-        //         {
-        //             data: "total-time"
-        //         },
-        //         {
-        //             data: "total-ernings",
-        //             render: $.fn.dataTable.render.number(",", ".", 2, "$")
-        //         }
-            ]
-        });
-
-        //  dashboardTable.fnDraw();
-
         console.log(userData);
         // const wage = $("#total").html(userData.wage.toString().replace(/\d(?=(?:\d{3})+$)/g,"$&,"));
         var newTr = $("<tr>");
@@ -58,9 +25,7 @@ $(document).ready(function () {
         return newTr;
     }
 
-    // function formatNumber (number) {
-    //     return number.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-    // }
+    
     // Function for retrieving authors and getting them ready to be rendered to the page
     function getUsers() {
         $.get("/api/dashboard", function (data) {

@@ -5,7 +5,7 @@ const session = require("express-session");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const router = express.Router();
-const db = require("../models");
+// const db = require("../models");
 const jwtSecret = require("../config/jwt-config");
 const path = require("path");
 
