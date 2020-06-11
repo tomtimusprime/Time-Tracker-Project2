@@ -10,6 +10,7 @@ const clockOutTimeEl = document.querySelector("#clock-out-time");
 const currentTimeEl = document.querySelector("#current-time");
 currentTimeEl.textContent = "Current Time: " + moment().format("h:mm:ss A");
 const timeClockedInEl = document.querySelector("#time-clocked-in");
+const todaysEarnings = document.querySelector("#money-earned");
 // const users = require("./users");
 
 let breakTime = false;
@@ -47,6 +48,7 @@ function displayLapsedTime() {
         secondsLabel.innerHTML = pad(totalSeconds % 60);
         minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
         hoursLabel.innterHTML = pad(parseInt(totalSeconds / 3600));
+        displayEarnings();
     }
 
     function pad(val) {
@@ -61,7 +63,7 @@ function displayLapsedTime() {
 }
 
 function displayEarnings() {
-    let earnings = (wage / 3600) * totalSeconds;
+    todaysEarnings.textContent = ((13 / 3600) * totalSeconds).toFixed(2);
 }
 
 function displayTimeTimer() {
