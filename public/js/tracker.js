@@ -8,7 +8,8 @@ const clockOutTimeEl = document.querySelector("#clock-out-time");
 const currentTimeEl = document.querySelector("#current-time");
 currentTimeEl.textContent = "Current Time: " + moment().format("h:mm:ss A");
 const timeClockedInEl = document.querySelector("#time-clocked-in");
-const users = require('./users');
+let todayEarnings = document.querySelector("#earnings");
+//const users = require('./users');
 
 let breakTime = false;
 let resumeClockInTime;
@@ -22,9 +23,10 @@ let wage;
 let now = moment();
 displayTimeTimer();
 currentTimeTimer();
+//displayEarnings();
 
 // var minutesPassed = moment().diff(start, 'minutes');
-
+console.log("this is tracker.js");
 function displayLapsedTime() {
 
     const hoursLabel = document.querySelector("#hours");
@@ -45,6 +47,7 @@ function displayLapsedTime() {
         secondsLabel.innerHTML = pad(totalSeconds % 60);
         minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
         hoursLabel.innterHTML = pad(parseInt(totalSeconds / 3600));
+        displayEarnings();
     }
 
     function pad(val) {
@@ -58,8 +61,11 @@ function displayLapsedTime() {
 
 }
 
+//users.addUser(id="first-name-input",lastname,wage)
+
 function displayEarnings() {
-    let earnings = (wage / 3600) * totalSeconds;
+    let earningDisplay = (13 / 3600) * totalSeconds;
+    todayEarnings.textContent = earningDisplay.toFixed(2);
 }
 
 function displayTimeTimer() {
@@ -90,8 +96,7 @@ clockOutBtn.addEventListener("click", function (e) {
     clickedClockOut = true;
     clockInBtn.disabled = false;
     clockOutBtn.disabled = true;
-    users.updateUser(id, timeWorked, totalTime, totalEarnings);
-
+    //    users.updateUser(id, timeWorked, totalTime, totalEarnings);
 })
 
 breakBtn.addEventListener("click", (e) => {
