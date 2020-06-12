@@ -20,11 +20,12 @@ module.exports = passport => {
       {
         usernameField: "email",
         passwordField: "password",
+        passReqToCallback: true,
         session: true
       },
-      async (email, password, cb) => {
+      async (req, email, password, cb) => {
         let data = await db.account.findOne({ where: { email: email } });
-
+        console.log(req.body);
         if (data) {
           return cb(null, false, {
             message: "Oops! Email already signed-up."

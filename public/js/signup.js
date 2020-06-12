@@ -14,7 +14,8 @@ $(document).ready(function () {
       first_name: firstNameInput.val().trim(),
       last_name: lastNameInput.val().trim(),
       email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInput.val().trim(),
+      wage: wageInput.val().trim()
     };
 
     if (!userData.email || !userData.password) {
@@ -26,37 +27,17 @@ $(document).ready(function () {
     passwordInput.val("");
     firstNameInput.val("");
     lastNameInput.val("");
+    wageInput.val("");
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   const signUpUser = (userData) => {
     $.post("/signup", userData, function (data) {
-      console.log("account input success")
-      addUser(firstNameInput.val().trim(), lastNameInput.val().trim(), wageInput.val().trim());
-    })
-  }
-
-  const addUser = (firstName, lastName, wage) => {
-    let newUser = {
-      first_name: firstName,
-      last_name: lastName,
-      time_worked: 0,
-      wage: wage,
-      total_time: 0,
-      total_earnings: 0
-    };
-
-    $.post("/user", newUser, function (data) {
-      console.log("user input success");
+      console.log("account input success");
       window.location.replace("/login");
     })
-  };
-
-  // const createTable = (userData, firstName, lastName, wage) => {
-  //    signUpUser(userData);
-  //    addUser(firstName, lastName, wage);
-  // }
+  }
 
   function handleLoginErr(err) {
     $("#alert .msg").text(err.responseJSON);
