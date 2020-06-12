@@ -53,10 +53,10 @@ router.get("/api/users/:id", async (req, res) => {
 });
 
 router.post(
-  "/api/users",
+  "/user",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    const data = await db.account.create(req.body);
+    const data = await db.user.create(req.body);
 
     res.json(data);
   }
