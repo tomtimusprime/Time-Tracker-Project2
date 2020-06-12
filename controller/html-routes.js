@@ -16,7 +16,11 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/tracker", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/tracker.html"));
+    if (req.user) {
+        res.sendFile(path.join(__dirname, "../public/tracker.html"));
+    } else {
+        res.redirect("/login");
+    }
 });
 
 

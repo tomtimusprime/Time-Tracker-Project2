@@ -9,12 +9,10 @@ body, h2, caption{
 .navigation-bkgrd {
   background-color: #B7410E ;
 }
-/* .navbar-light {
-  color: white;
-} */
-/* nav, .nav-link {
-  color: white;
-} */
+
+.navbar-brand{
+  font-weight: bold;
+}
 
 .jumbotron {
   padding: 0px; 
@@ -24,11 +22,6 @@ body, h2, caption{
 
 #dashboardH2{
   text-align: center;
-}
-
-.navbar-brand{
-  /* color:white; */
-  font-weight: bold;
 }
 
 #signupContainer, #loginContainer {
