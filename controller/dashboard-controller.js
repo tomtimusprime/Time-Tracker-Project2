@@ -8,7 +8,7 @@ const db = require("../models");
 // Flash
 router.use(
     session({
-      cookie: { maxAge: 60000 },
+      cookie: { maxAge: 6000000 },
       secret: "wootwoot",
       saveUninitialized: true,
       resave: true
