@@ -32,8 +32,9 @@ module.exports = passport => {
           });
         } else {
           data = await db.account.create({
-            first_name: "",
-            last_name: "",
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            wage: req.body.wage,
             email: email,
             password: await db.account.generateHash(password)
           });
