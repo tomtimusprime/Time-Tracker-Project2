@@ -9,10 +9,12 @@ body, h2, caption{
 .navigation-bkgrd {
   background-color: #B7410E ;
 }
-
-nav, .nav-link {
+/* .navbar-light {
   color: white;
-}
+} */
+/* nav, .nav-link {
+  color: white;
+} */
 
 .jumbotron {
   padding: 0px; 
@@ -25,7 +27,7 @@ nav, .nav-link {
 }
 
 .navbar-brand{
-  color:white;
+  /* color:white; */
   font-weight: bold;
 }
 
