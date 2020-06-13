@@ -53,6 +53,11 @@ img {
   bottom: 50px;
 }
 
+.btn-red {
+  background-color: red;
+  color: white;
+}
+
 .box1 .text{
   position: absolute;
   text-align: center;
@@ -61,9 +66,32 @@ img {
   background-color: transparent;
 }
 
-.btn {
+#dashboard-table {
+  /* display: block; */
+  height: 100px;
+  overflow: auto;
+  width: 100%;
+  color: #B7410E;
+}
+
+.dashboard-tableWrapper {
+  margin: 0 auto;
+}
+
+th, td {
+  white-space: nowrap;
+  color: #B7410E;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+.authenticateBtn {
   color: white;
   background-color: #B7410E ;
+  /* border: 25px; */
+  border-radius: 4px;
 }
 
 h1 {
