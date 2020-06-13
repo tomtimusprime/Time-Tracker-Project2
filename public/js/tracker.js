@@ -69,7 +69,8 @@ function displayEarnings() {
 }
 
 $.get("/api/tracker/user_data").then(function(data) {
-    userWage=data[0].wage;
+    console.log(data);
+    userWage=data.wage;
   });
 
 function displayTimeTimer() {
