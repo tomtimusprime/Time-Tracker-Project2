@@ -1,16 +1,53 @@
 $(document).ready(function () {
-
+    // var userIdInput = $("#userId");
     var userList = $("tbody");
     var userContainer = $(".user-container");
 
+
+
     $(document).on("click", ".delete-user", handleDeleteButtonPress);
 
-    // Getting the initial list of Authors
-    getUsers();
+    // Getting the initial list of users
+    // getUsers();
 
-    // Function for creating a new list row for authors
+     // Function for retrieving authors and getting them ready to be rendered to the page
+     function getUsers() {
+        $.get("/api/dashboard", function (data) {
+            var rowsToAdd = [];
+            for (var i = 0; i < data.length; i++) {
+                rowsToAdd.push(createUserRow(data[i]));
+            }
+            renderUserList(rowsToAdd);
+        });
+    }
+    var userID = $("#enteredUserId").val().trim();
+
+    $("#submitUser").on("click", function(event) {
+        console.log(userID);
+
+        event.preventDefault();
+
+        getUserById(userID);
+    });
+
+    function getUserById (userID) {
+        
+        console.log(userID);
+        
+        $.ajax({
+          method: "GET",
+          url: "/api/dashboard/" + userID
+        })
+          .then(getUsers);
+      }
+
+    $("#dashboard-table").DataTable({
+        "scrollX": true
+    });
+    // Function for creating a new list row for users
     function createUserRow(userData) {
-        console.log(userData);
+
+        // console.log(userData);
         // const wage = $("#total").html(userData.wage.toString().replace(/\d(?=(?:\d{3})+$)/g,"$&,"));
         var newTr = $("<tr>");
         newTr.data("user", userData);
@@ -21,21 +58,12 @@ $(document).ready(function () {
         newTr.append("<td> $" + userData.wage + "</td>");
         newTr.append("<td>" + userData.total_time + "</td>");
         newTr.append("<td> $" + userData.total_earnings + "</td>");
-        newTr.append("<td><a style='cursor:pointer;color:red' class='delete-user'>Delete User</a></td>");
+        // newTr.append("<td><a style='cursor:pointer;color:red' class='delete-user'>Delete User</a></td>");
+        newTr.append("<td><button type='button' class='btn-red delete-user btn-sm m-0'>Delete User</button></td>");
         return newTr;
     }
 
     
-    // Function for retrieving authors and getting them ready to be rendered to the page
-    function getUsers() {
-        $.get("/api/dashboard", function (data) {
-            var rowsToAdd = [];
-            for (var i = 0; i < data.length; i++) {
-                rowsToAdd.push(createUserRow(data[i]));
-            }
-            renderUserList(rowsToAdd);
-        });
-    }
 
     // A function for rendering the list of authors to the page
     function renderUserList(rows) {
@@ -60,11 +88,11 @@ $(document).ready(function () {
 
     // Function for handling what happens when the delete button is pressed
     function handleDeleteButtonPress() {
-        var listItemData = $(this).parent("td").parent("tr").data("user");
+        var listItemData = $(this).parent("td").parent("tr").data("account");
         var id = listItemData.id;
         $.ajax({
             method: "DELETE",
-            url: "/api/users/" + id
+            url: "/api/dashboard/" + id
         })
             .then(getUsers);
     }
