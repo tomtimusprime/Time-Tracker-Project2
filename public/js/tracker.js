@@ -62,9 +62,15 @@ function displayLapsedTime() {
 
 }
 
+let userWage;
+
 function displayEarnings() {
-    todaysEarnings.textContent = ((13 / 3600) * totalSeconds).toFixed(2);
+    todaysEarnings.textContent = ((userWage/ 3600) * totalSeconds).toFixed(2);
 }
+
+$.get("/api/tracker/user_data").then(function(data) {
+    userWage=data[0].wage;
+  });
 
 function displayTimeTimer() {
     timer = setInterval(() => {
