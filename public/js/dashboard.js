@@ -41,6 +41,7 @@ $(document).ready(function () {
           .then(getUsers);
       }
 
+    //   Make table scroll on the x-axis for responsiveness
     $("#dashboard-table").DataTable({
         "scrollX": true
     });
