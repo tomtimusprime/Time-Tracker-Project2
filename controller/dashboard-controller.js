@@ -3,6 +3,8 @@ const passport = require("passport");
 const router = express.Router();
 const db = require("../models");
 const webToken = require("jsonwebtoken");
+const config = require("../config/jwt-config");
+
 
 
 router.get("/api/dashboard", async (req, res) => {
