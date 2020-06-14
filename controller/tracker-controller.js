@@ -9,7 +9,7 @@ router.get("/api/tracker/user_data",
     async (req, res) => {
         try {
             const jwt = req.cookies.jwt;
-            const decoded = webToken.verify(jwt, "i want to believe")
+            const decoded = webToken.verify(jwt, "i want to believe");
             console.log(jwt);
             console.log(decoded);
             const data = await db.account.findOne({ where: { email: decoded.email } });
@@ -31,12 +31,12 @@ router.put("/api/tracker/user_data",
             db.account.update(
                 { total_time: req.body.total_time, total_earnings: req.body.total_earnings },
                 { where: { email: decoded.email } }
-            )
+            );
         } catch (error) {
             console.error(error);
 
             res.status(500).send();
         }
-    })
+    });
 
 module.exports = router;

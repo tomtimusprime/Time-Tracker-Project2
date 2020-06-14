@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
             password: {
                 type: DataTypes.STRING,
                 allowNull: false
-            },            first_name: {
+            }, 
+            first_name: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -23,40 +24,37 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            time_worked: {
-                type: DataTypes.DECIMAL(10,2),
-                allowNull: false,
-                defaultValue: 0
-            },
             wage: {
-                type: DataTypes.DECIMAL(6,2),
+                type: DataTypes.DECIMAL(6, 2),
                 allowNull: false
-            },
-            total_time: {
-                type: DataTypes.DECIMAL(10,2),
-                allowNull: false,
-                defaultValue: 0
-            },
-            total_earnings: {
-                type: DataTypes.DECIMAL(10,2),
-                allowNull: false,
-                defaultValue: 0
             }
-
         },
         {
-            freezeTableName: true
+            freezeTableName: true,
+            timestamps: true,
+            createdAt: "created_at",
+            updatedAt: "updated_at"
         }
     );
+
+    Account.associate = (models) => {
+        Account.hasMany(models.hours, {
+            onDelete: "cascade",
+            foreignKey: {
+                name: "user_id",
+                allowNull: false
+            }
+        });
+    };
 
     Account.generateHash = async (password) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         return hashedPassword;
-    }
+    };
+
     Account.validPassword = (inputPwd, dbPwd) => {
         return bcrypt.compareSync(inputPwd, dbPwd);
     };
-
 
     return Account;
 };
