@@ -1,13 +1,17 @@
 USE employee_db;
 
-INSERT INTO user (first_name, last_name, time_worked, wage, total_time, total_earnings, accountId)
- VALUES ("Black", "Beard", 40, 25.25, 325, 8206.25, 1);
+UPDATE account
+SET wage = 25.25, time_worked = 40, total_time = 325, total_earnings = 8206.25 
+WHERE id = 1;
  
- INSERT INTO user (first_name, last_name, time_worked, wage, total_time, total_earnings, accountId)
- VALUES ("Tom", "Jones", 40, 15.85, 220, 3487, 2);
+UPDATE account
+SET wage = 18.75, time_worked = 40, total_time = 220, total_earnings = 3487 
+WHERE id = 2;
  
- INSERT INTO user (first_name, last_name, time_worked, wage, total_time, total_earnings, accountId)
- VALUES ("Mary", "Poppins", 40, 32.15, 565, 18164.75, 3);
+UPDATE account
+SET wage = 32.15, time_worked = 40, total_time = 565, total_earnings = 18164.75 
+WHERE id = 3;
  
- INSERT INTO user (first_name, last_name, time_worked, wage, total_time, total_earnings, accountId)
- VALUES ("Joe", "Cool", 40, 12.00, 150, 1800, 4);
+UPDATE account
+SET wage = 12.00, time_worked = 40, total_time = 150, total_earnings = 1800 
+WHERE id = 4;

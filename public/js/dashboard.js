@@ -5,13 +5,28 @@ $(document).ready(function () {
 
 
 
-    $(document).on("click", ".delete-user", handleDeleteButtonPress);
+    // $(document).on("click", ".delete-user", handleDeleteButtonPress);
 
     // Getting the initial list of users
     // getUsers();
 
-     // Function for retrieving authors and getting them ready to be rendered to the page
-     function getUsers() {
+    // Set the defaults for the dashboard-table display
+    $("#dashboard-table").DataTable({
+        "paging": false,
+        "searching": false,
+        "ordering": false,
+        "info": false,
+        "language":
+        {
+            "zeroRecords": "",
+            "emptyTable": "",
+            "infoEmpty": "",
+            "info": "",
+        }
+    });
+
+    // Function for retrieving users and getting them ready to be rendered to the page
+    function getUsers() {
         $.get("/api/dashboard", function (data) {
             var rowsToAdd = [];
             for (var i = 0; i < data.length; i++) {
@@ -20,36 +35,45 @@ $(document).ready(function () {
             renderUserList(rowsToAdd);
         });
     }
-    var userID = $("#enteredUserId").val().trim();
+    
 
-    $("#submitUser").on("click", function(event) {
+    // $("#submitUser").on("click", function (event) {
+    //     console.log(userID);
+
+    //     event.preventDefault();
+
+    //     getUserById(userID);
+    // });
+    // var userID = $("#enteredUserId").val().trim();
+
+    let userID;
+ 
+    $.get("/api/dashboard/:id").then(function(data) {
+        console.log("I am in the .get(//api/dashboard/:id/)");
+        console.log(data);
+        userID = data.id;
         console.log(userID);
 
         event.preventDefault();
 
         getUserById(userID);
-    });
+      });
 
-    function getUserById (userID) {
-        
+    function getUserById(userID) {
+
         console.log(userID);
-        
-        $.ajax({
-          method: "GET",
-          url: "/api/dashboard/" + userID
-        })
-          .then(getUsers);
-      }
 
-    //   Make table scroll on the x-axis for responsiveness
-    $("#dashboard-table").DataTable({
-        "scrollX": true
-    });
+        $.ajax({
+            method: "GET",
+            url: "/api/dashboard/" + userID
+            
+        })
+            .then(getUsers);
+    }
+
+    
     // Function for creating a new list row for users
     function createUserRow(userData) {
-
-        // console.log(userData);
-        // const wage = $("#total").html(userData.wage.toString().replace(/\d(?=(?:\d{3})+$)/g,"$&,"));
         var newTr = $("<tr>");
         newTr.data("user", userData);
         newTr.append("<td>" + userData.id + "</td>");
@@ -60,14 +84,25 @@ $(document).ready(function () {
         newTr.append("<td>" + userData.total_time + "</td>");
         newTr.append("<td> $" + userData.total_earnings + "</td>");
         // newTr.append("<td><a style='cursor:pointer;color:red' class='delete-user'>Delete User</a></td>");
-        newTr.append("<td><button type='button' class='btn-red delete-user btn-sm m-0'>Delete User</button></td>");
+        // newTr.append("<td><button type='button' class='btn-red delete-user btn-sm m-0'>Delete User</button></td>");
         return newTr;
     }
 
-    
+
 
     // A function for rendering the list of authors to the page
     function renderUserList(rows) {
+        // $("#dashboard-table").DataTable({
+        //     "retrieve": true,
+        //     "scrollX": true,
+        //     "searching": false,
+        //     "language": {
+        //         "lengthMenu": "",
+        //         "zeroRecords": "",
+        //         "info": "",
+        //         "infoEmpty": ""
+        //     }
+        // });
         userList.children().not(":last").remove();
         userContainer.children(".alert").remove();
         if (rows.length) {
@@ -88,13 +123,13 @@ $(document).ready(function () {
     }
 
     // Function for handling what happens when the delete button is pressed
-    function handleDeleteButtonPress() {
-        var listItemData = $(this).parent("td").parent("tr").data("account");
-        var id = listItemData.id;
-        $.ajax({
-            method: "DELETE",
-            url: "/api/dashboard/" + id
-        })
-            .then(getUsers);
-    }
+    // function handleDeleteButtonPress() {
+    //     var listItemData = $(this).parent("td").parent("tr").data("account");
+    //     var id = listItemData.id;
+    //     $.ajax({
+    //         method: "DELETE",
+    //         url: "/api/dashboard/" + id
+    //     })
+    //         .then(getUsers);
+    // }
 });

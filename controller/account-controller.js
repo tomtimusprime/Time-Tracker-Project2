@@ -3,10 +3,6 @@ const passport = require("passport");
 const router = express.Router();
 const db = require("../models");
 
-// Passport
-require("../config/passport")(passport);
-router.use(passport.initialize());
-router.use(passport.session());
 
 router.get("/users", async (req, res) => {
   try {
@@ -40,17 +36,17 @@ router.get(
   }
 );
 
-router.get("/api/users/:id", async (req, res) => {
-  try {
-    const data = await db.account.findAll({ where: { id: req.params.id }, include: [db.history] });
+// router.get("/api/users/:id", async (req, res) => {
+//   try {
+//     const data = await db.account.findAll({ where: { id: req.params.id }});
 
-    res.json(data);
-  } catch (error) {
-    console.error(error);
+//     res.json(data);
+//   } catch (error) {
+//     console.error(error);
 
-    res.status(500).send();
-  }
-});
+//     res.status(500).send();
+//   }
+// });
 
 
 
@@ -64,20 +60,20 @@ router.post(
   }
 );
 
-router.delete(
-  "/api/users/:id",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    try {
-      const data = await db.account.destroy({ where: { id: req.params.id } });
+// router.delete(
+//   "/api/users/:id",
+//   passport.authenticate("jwt", { session: false }),
+//   async (req, res) => {
+//     try {
+//       const data = await db.account.destroy({ where: { id: req.params.id } });
 
-      res.json(data);
-    } catch (error) {
-      console.error(error);
+//       res.json(data);
+//     } catch (error) {
+//       console.error(error);
 
-      res.status(500).send();
-    }
-  }
-);
+//       res.status(500).send();
+//     }
+//   }
+// );
 
 module.exports = router;

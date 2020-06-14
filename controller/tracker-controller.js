@@ -19,7 +19,7 @@ router.get("/api/tracker/user_data",
 
             res.status(500).send();
         }
-    })
+    });
 
 router.put("/api/tracker/user_data",
     passport.authenticate("jwt", { session: true }),

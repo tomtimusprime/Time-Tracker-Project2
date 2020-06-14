@@ -36,8 +36,8 @@ $(document).ready(function () {
     $.post("/signup", userData, function (data) {
       console.log("account input success");
       window.location.replace("/login");
-    })
-  }
+    });
+  };
 
   function handleLoginErr(err) {
     $("#alert .msg").text(err.responseJSON);
