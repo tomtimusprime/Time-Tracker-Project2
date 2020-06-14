@@ -32,12 +32,12 @@ router.put("/api/tracker/user_data",
             db.account.update(
                 { total_time: req.body.total_time, total_earnings: req.body.total_earnings },
                 { where: { email: decoded.email } }
-            )
+            );
         } catch (error) {
             console.error(error);
 
             res.status(500).send();
         }
-    })
+    });
 
 module.exports = router;

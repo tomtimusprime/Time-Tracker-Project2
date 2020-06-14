@@ -7,8 +7,6 @@ const config = require("../config/jwt-config");
 
 
 
-
-
 router.get("/api/dashboard", async (req, res) => {
     try {
 
@@ -25,38 +23,43 @@ router.get("/api/dashboard", async (req, res) => {
 
 // Get route for retrieving a single user
 router.get("/api/dashboard/:id", async (req, res) => {
+    passport.authenticate("jwt", { session: true }),
+        async (req, res) => {
+            try {
+                console.log("Iam in the /api/dashboard/:id");
 
-    async (req, res) => {
-        try {
-            console.log("Iam in the /api/dashboard/:id")
-            passport.authenticate("jwt", { session: true }),
-            // passport.authenticate("jwt", { failureRedirect: "/login" });
-            console.log(req.user);
-            const jwt = req.cookies.jwt;
-            const decoded = webToken.verify(jwt, config.secret);
-            console.log(jwt);
-            console.log(decoded);
-            const data = await db.account.findOne({where:{email: decoded.email}});
-            res.json(data);
-        } catch (error) {
-            console.error(error);
+                // passport.authenticate("jwt", { failureRedirect: "/login" });
+                console.log(req.user);
+                const jwt = req.cookies.jwt;
+                const decoded = webToken.verify(jwt, "i want to believe");
+                console.log(jwt);
+                console.log(decoded);
+                const data = await db.account.findOne({
+                    where: {
+                        email: decoded.email
+                    },
+                    include: [db.hours]
+                });
+                res.json(data);
+            } catch (error) {
+                console.error(error);
 
-            res.status(500).send();
-        }
-    // try {
-    //     
-    //     const data = await db.account.findOne({
-    //         where: req.params.id
-    //     });
+                res.status(500).send();
+            }
+            // try {
+            //     
+            //     const data = await db.account.findOne({
+            //         where: req.params.id
+            //     });
 
-    //     res.json(data);
+            //     res.json(data);
 
-    // } catch (error) {
-    //     console.log(error);
+            // } catch (error) {
+            //     console.log(error);
 
-    //     res.status(500).send();
-    // }
-    };
+            //     res.status(500).send();
+            // }
+        };
 });
 
 // DELETE route for deleting users. We can access the ID of the user to delete in

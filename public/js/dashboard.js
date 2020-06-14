@@ -36,7 +36,6 @@ $(document).ready(function () {
         });
     }
     
-
     // $("#submitUser").on("click", function (event) {
     //     console.log(userID);
 
@@ -65,12 +64,10 @@ $(document).ready(function () {
 
         $.ajax({
             method: "GET",
-            url: "/api/dashboard/" + userID
-            
+            url: "/api/dashboard/" + userID  
         })
             .then(getUsers);
     }
-
     
     // Function for creating a new list row for users
     function createUserRow(userData) {
@@ -79,30 +76,23 @@ $(document).ready(function () {
         newTr.append("<td>" + userData.id + "</td>");
         newTr.append("<td>" + userData.first_name + "</td>");
         newTr.append("<td>" + userData.last_name + "</td>");
-        newTr.append("<td>" + userData.time_worked + "</td>");
+        newTr.append("<td> $" + userData.email + "</td>");
         newTr.append("<td> $" + userData.wage + "</td>");
-        newTr.append("<td>" + userData.total_time + "</td>");
-        newTr.append("<td> $" + userData.total_earnings + "</td>");
+        newTr.append("<td> $" + userData.hrs_worked_today + "</td>");
+        newTr.append("<td>" + userData.hrs_worked_week + "</td>");
+        newTr.append("<td> $" + userData.hrs_worked_month + "</td>");
+        newTr.append("<td>" + userData.hrs_worked_ytd + "</td>");
+        newTr.append("<td>" + userData.earnings_today + "</td>");
+        newTr.append("<td> $" + userData.earnings_week + "</td>");
+        newTr.append("<td>" + userData.earnings_month + "</td>");
+        newTr.append("<td> $" + userData.earnings_ytd + "</td>");       
         // newTr.append("<td><a style='cursor:pointer;color:red' class='delete-user'>Delete User</a></td>");
         // newTr.append("<td><button type='button' class='btn-red delete-user btn-sm m-0'>Delete User</button></td>");
         return newTr;
     }
 
-
-
     // A function for rendering the list of authors to the page
     function renderUserList(rows) {
-        // $("#dashboard-table").DataTable({
-        //     "retrieve": true,
-        //     "scrollX": true,
-        //     "searching": false,
-        //     "language": {
-        //         "lengthMenu": "",
-        //         "zeroRecords": "",
-        //         "info": "",
-        //         "infoEmpty": ""
-        //     }
-        // });
         userList.children().not(":last").remove();
         userContainer.children(".alert").remove();
         if (rows.length) {

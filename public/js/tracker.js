@@ -67,7 +67,7 @@ let totalEarnings;
 const displayEarnings=()=> {
     totalEarnings = ((userData.wage/ 3600) * totalSeconds).toFixed(2);
     todaysEarnings.textContent = totalEarnings;
-}
+};
 
 let newTime;
 let newEarnings;
@@ -75,20 +75,20 @@ let newEarnings;
 const addTime=(time)=>{
     let oldTime=parseInt(userData.total_time);
     newTime=oldTime+time;
-}
+};
 
 const addEarnings=(earnings)=>{
     let oldEarnings=parseFloat(userData.total_earnings);
-    console.log(oldEarnings)
+    console.log(oldEarnings);
     newEarnings=oldEarnings+parseFloat(earnings);
-}
+};
 
 const updateUserData=()=>{
 $.get("/api/tracker/user_data").then(function(data) {
     console.log(data);
     userData=data;
   });
-}
+};
 
 function displayTimeTimer() {
     timer = setInterval(() => {
@@ -125,13 +125,13 @@ clockOutBtn.addEventListener("click", function (e) {
     let newUserData={
         total_earnings: newEarnings,
         total_time: newTime
-    }
+    };
     $.ajax({
-        url: '/api/tracker/user_data',
-        type: 'PUT',
+        url: "/api/tracker/user_data",
+        type: "PUT",
         data: newUserData,
         success: function(data) {
-          alert('Load was performed.');
+          alert("Load was performed.");
         }
       });
 
