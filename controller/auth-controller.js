@@ -5,9 +5,7 @@ const session = require("express-session");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const router = express.Router();
-// const db = require("../models");
 const jwtSecret = require("../config/jwt-config");
-const path = require("path");
 
 // Flash
 router.use(
@@ -26,8 +24,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.use(cookieParser());
-
-
 
 router.post(
   "/login",

@@ -10,7 +10,7 @@ router.get("/api/tracker/user_data",
         try {
             console.log(req.user);
             const jwt = req.cookies.jwt;
-            const decoded=webToken.verify(jwt,"i want to believe")
+            const decoded=webToken.verify(jwt,"i want to believe");
             console.log(jwt);
             console.log(decoded);
             const data = await db.account.findOne({where:{email:decoded.email}});
@@ -20,6 +20,6 @@ router.get("/api/tracker/user_data",
 
             res.status(500).send();
         }
-    })
+    });
 
 module.exports = router;
