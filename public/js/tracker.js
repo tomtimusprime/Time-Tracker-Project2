@@ -61,16 +61,34 @@ function displayLapsedTime() {
 
 }
 
-let userWage;
+let userData;
+let totalEarnings;
 
-function displayEarnings() {
-    todaysEarnings.textContent = ((userWage/ 3600) * totalSeconds).toFixed(2);
+const displayEarnings=()=> {
+    totalEarnings = ((userData.wage/ 3600) * totalSeconds).toFixed(2);
+    todaysEarnings.textContent = totalEarnings;
 }
 
+let newTime;
+let newEarnings;
+
+const addTime=(time)=>{
+    let oldTime=parseInt(userData.total_time);
+    newTime=oldTime+time;
+}
+
+const addEarnings=(earnings)=>{
+    let oldEarnings=parseFloat(userData.total_earnings);
+    console.log(oldEarnings)
+    newEarnings=oldEarnings+parseFloat(earnings);
+}
+
+const updateUserData=()=>{
 $.get("/api/tracker/user_data").then(function(data) {
     console.log(data);
-    userWage=data.wage;
+    userData=data;
   });
+}
 
 function displayTimeTimer() {
     timer = setInterval(() => {
@@ -84,6 +102,7 @@ function currentTimeTimer() {
 }
 
 clockInBtn.addEventListener("click", function (e) {
+    updateUserData();
     start = moment();
     clockInTime = moment().format("hh:mm:ss");
     clockInTimeEl.textContent = "    " + clockInTime;
@@ -94,13 +113,27 @@ clockInBtn.addEventListener("click", function (e) {
     displayLapsedTime();
 });
 clockOutBtn.addEventListener("click", function (e) {
+    updateUserData();
     clockOutTime = moment().format("hh:mm:ss");
     clockOutTimeEl.textContent = "    " + clockOutTime;
     localStorage.setItem("clockOut", moment().format("hh:mm:ss"));
     clickedClockOut = true;
     clockInBtn.disabled = false;
     clockOutBtn.disabled = true;
-    // users.updateUser(id, timeWorked, totalTime, totalEarnings);
+    addTime(totalSeconds);
+    addEarnings(totalEarnings);
+    let newUserData={
+        total_earnings: newEarnings,
+        total_time: newTime
+    }
+    $.ajax({
+        url: '/api/tracker/user_data',
+        type: 'PUT',
+        data: newUserData,
+        success: function(data) {
+          alert('Load was performed.');
+        }
+      });
 
 });
 

@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: 0
             },
             total_earnings: {
-                type: DataTypes.DECIMAL(12,2),
+                type: DataTypes.DECIMAL(10,2),
                 allowNull: false,
                 defaultValue: 0
             }
