@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-var cookieParser = require('cookie-parser')
+var cookieParser = require("cookie-parser");
 const user = require("./controller/user-controller.js");
 const authorize = require("./controller/auth-controller.js");
 const dashboard = require("./controller/dashboard-controller.js");

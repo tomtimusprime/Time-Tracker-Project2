@@ -34,8 +34,6 @@ router.get("/api/dashboard/userdata",
         async (req, res) => {
             try {
                 console.log("Iam in the /api/dashboard/:id");
-
-                // passport.authenticate("jwt", { failureRedirect: "/login" });
                 console.log(req.user);
                 const decoded = authenticate(req);
                 console.log(decoded);
@@ -51,39 +49,7 @@ router.get("/api/dashboard/userdata",
 
                 res.status(500).send();
             }
-            // try {
-            //     
-            //     const data = await db.account.findOne({
-            //         where: req.params.id
-            //     });
-
-            //     res.json(data);
-
-            // } catch (error) {
-            //     console.log(error);
-
-            //     res.status(500).send();
-            // }
+        
 });
-
-// DELETE route for deleting users. We can access the ID of the user to delete in
-// req.params.id
-// router.delete("/api/dashboard/:id", async (req, res) => {
-//     try {
-//         passport.authenticate("jwt", { failureRedirect: "/login" });
-//         const data = await db.account.destroy({
-//             where: {
-//                 id: req.params.id
-//             }
-//         });
-
-//         res.json(data);
-
-//     } catch (error) {
-//         console.log(error);
-
-//         res.status(500).send(error);
-//     }
-// });
 
 module.exports = router;

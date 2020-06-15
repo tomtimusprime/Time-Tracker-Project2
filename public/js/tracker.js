@@ -151,17 +151,17 @@ clockInBtn.addEventListener("click", function (e) {
     $.ajax({
         url: "/api/tracker/clock_in",
         type: "PUT",
-    })
-    .then((data) => {
-
     });
+    // .then((data) => {
+
+    // });
 });
 clockOutBtn.addEventListener("click", function (e) {
     updateUserData();
     clockOutTime = moment().format("hh:mm:ss");
     // clockOutTimeEl.textContent = "    " + clockOutTime;
     clickedClockOut = true;
-    $("#clockedout").addClass("hide")
+    $("#clockedout").addClass("hide");
     $("#clockedin").removeClass("hide");
     addTime(totalSeconds);
     addEarnings(totalEarnings);
