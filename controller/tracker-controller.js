@@ -51,10 +51,7 @@ router.put("/api/tracker/clock_in",
             console.log("USER", req.user);
             db.session.create(
                 { clock_in: new Date(), user_id: req.user.dataValues.id},
-            )
-            // .then((data) => {
-            //     res.json(data);
-            // });
+            );
         } catch (error) {
             console.error(error);
 

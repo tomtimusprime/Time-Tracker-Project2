@@ -152,9 +152,6 @@ clockInBtn.addEventListener("click", function (e) {
         url: "/api/tracker/clock_in",
         type: "PUT",
     });
-    // .then((data) => {
-
-    // });
 });
 clockOutBtn.addEventListener("click", function (e) {
     updateUserData();
@@ -173,9 +170,7 @@ clockOutBtn.addEventListener("click", function (e) {
         url: "/api/tracker/clock_out",
         type: "PUT",
       });
-
 });
-
 });
 
 
