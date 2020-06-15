@@ -3,7 +3,7 @@ $(document).ready(function () {
     var userList = $("tbody");
     var userContainer = $(".user-container");
 
-
+console.log("On dashboard.js page.");
 
     // $(document).on("click", ".delete-user", handleDeleteButtonPress);
 
@@ -26,15 +26,15 @@ $(document).ready(function () {
     });
 
     // Function for retrieving users and getting them ready to be rendered to the page
-    function getUsers() {
-        $.get("/api/dashboard", function (data) {
-            var rowsToAdd = [];
-            for (var i = 0; i < data.length; i++) {
-                rowsToAdd.push(createUserRow(data[i]));
-            }
-            renderUserList(rowsToAdd);
-        });
-    }
+    // function getUsers() {
+    //     $.get("/api/dashboard", function (data) {
+    //         var rowsToAdd = [];
+    //         for (var i = 0; i < data.length; i++) {
+    //             rowsToAdd.push(createUserRow(data[i]));
+    //         }
+    //         renderUserList(rowsToAdd);
+    //     });
+    // }
     
     // $("#submitUser").on("click", function (event) {
     //     console.log(userID);
@@ -45,29 +45,46 @@ $(document).ready(function () {
     // });
     // var userID = $("#enteredUserId").val().trim();
 
-    let userID;
+    // let userID;
  
-    $.get("/api/dashboard/:id").then(function(data) {
+    $.get("/api/dashboard/userdata").then(function(userData) {
         console.log("I am in the .get(//api/dashboard/:id/)");
-        console.log(data);
-        userID = data.id;
-        console.log(userID);
+        console.log(userData);
+        var dataTable = $("tbody");
+        var newTr = $("<tr>");
+        newTr.data("user", userData);
+        newTr.append("<td>" + userData.id + "</td>");
+        newTr.append("<td>" + userData.first_name + "</td>");
+        newTr.append("<td>" + userData.last_name + "</td>");
+        newTr.append("<td>" + userData.email + "</td>");
+        newTr.append("<td> $" + userData.wage + "</td>");
+        newTr.append("<td>" + userData.hours[0].hrs_worked_today + "</td>");
+        newTr.append("<td>" + userData.hours[0].hrs_worked_week + "</td>");
+        newTr.append("<td>" + userData.hours[0].hrs_worked_month + "</td>");
+        newTr.append("<td>" + userData.hours[0].hrs_worked_ytd + "</td>");
+        newTr.append("<td> $" + userData.hours[0].earnings_today + "</td>");
+        newTr.append("<td> $" + userData.hours[0].earnings_week + "</td>");
+        newTr.append("<td> $" + userData.hours[0].earnings_month + "</td>");
+        newTr.append("<td> $" + userData.hours[0].earnings_ytd + "</td>");
+        dataTable.append(newTr);
+        // userID = user.id;
+        // console.log(userID);
 
-        event.preventDefault();
+        // event.preventDefault();
 
-        getUserById(userID);
+        // getUserById(userID);
       });
 
-    function getUserById(userID) {
+    // function getUserById(userID) {
 
-        console.log(userID);
+    //     console.log(userID);
 
-        $.ajax({
-            method: "GET",
-            url: "/api/dashboard/" + userID  
-        })
-            .then(getUsers);
-    }
+    //     $.ajax({
+    //         method: "GET",
+    //         url: "/api/dashboard/" + userID  
+    //     })
+    //         .then(getUsers);
+    // }
     
     // Function for creating a new list row for users
     function createUserRow(userData) {
@@ -76,15 +93,15 @@ $(document).ready(function () {
         newTr.append("<td>" + userData.id + "</td>");
         newTr.append("<td>" + userData.first_name + "</td>");
         newTr.append("<td>" + userData.last_name + "</td>");
-        newTr.append("<td> $" + userData.email + "</td>");
+        newTr.append("<td>" + userData.email + "</td>");
         newTr.append("<td> $" + userData.wage + "</td>");
-        newTr.append("<td> $" + userData.hrs_worked_today + "</td>");
+        newTr.append("<td>" + userData.hrs_worked_today + "</td>");
         newTr.append("<td>" + userData.hrs_worked_week + "</td>");
-        newTr.append("<td> $" + userData.hrs_worked_month + "</td>");
+        newTr.append("<td>" + userData.hrs_worked_month + "</td>");
         newTr.append("<td>" + userData.hrs_worked_ytd + "</td>");
-        newTr.append("<td>" + userData.earnings_today + "</td>");
+        newTr.append("<td> $" + userData.earnings_today + "</td>");
         newTr.append("<td> $" + userData.earnings_week + "</td>");
-        newTr.append("<td>" + userData.earnings_month + "</td>");
+        newTr.append("<td> $" + userData.earnings_month + "</td>");
         newTr.append("<td> $" + userData.earnings_ytd + "</td>");       
         // newTr.append("<td><a style='cursor:pointer;color:red' class='delete-user'>Delete User</a></td>");
         // newTr.append("<td><button type='button' class='btn-red delete-user btn-sm m-0'>Delete User</button></td>");

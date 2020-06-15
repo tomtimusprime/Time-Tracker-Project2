@@ -5,6 +5,13 @@ const db = require("../models");
 const webToken = require("jsonwebtoken");
 const config = require("../config/jwt-config");
 
+function authenticate(req) {
+    const jwt = req.cookies.jwt;
+    const decoded = webToken.verify(jwt, config.secret);
+    console.log(jwt);
+    console.log(decoded);
+    return decoded;
+}
 
 
 router.get("/api/dashboard", async (req, res) => {
@@ -22,7 +29,7 @@ router.get("/api/dashboard", async (req, res) => {
 });
 
 // Get route for retrieving a single user
-router.get("/api/dashboard/:id", async (req, res) => {
+router.get("/api/dashboard/userdata",
     passport.authenticate("jwt", { session: true }),
         async (req, res) => {
             try {
@@ -30,9 +37,7 @@ router.get("/api/dashboard/:id", async (req, res) => {
 
                 // passport.authenticate("jwt", { failureRedirect: "/login" });
                 console.log(req.user);
-                const jwt = req.cookies.jwt;
-                const decoded = webToken.verify(jwt, config.secret);
-                console.log(jwt);
+                const decoded = authenticate(req);
                 console.log(decoded);
                 const data = await db.account.findOne({
                     where: {
@@ -59,7 +64,6 @@ router.get("/api/dashboard/:id", async (req, res) => {
 
             //     res.status(500).send();
             // }
-        };
 });
 
 // DELETE route for deleting users. We can access the ID of the user to delete in

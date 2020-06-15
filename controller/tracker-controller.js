@@ -48,16 +48,20 @@ router.put("/api/tracker/clock_in",
     passport.authenticate("jwt", { session: true }),
     async (req, res) => {
         try {
-            console.log('USER', req.user);
+            console.log("USER", req.user);
             db.session.create(
                 { clock_in: new Date(), user_id: req.user.dataValues.id},
-            );
+            )
+            // .then((data) => {
+            //     res.json(data);
+            // });
         } catch (error) {
             console.error(error);
 
             res.status(500).send();
         }
     });
+
 router.put("/api/tracker/clock_out",
     passport.authenticate("jwt", { session: true }),
     async (req, res) => {
@@ -72,7 +76,7 @@ router.put("/api/tracker/clock_out",
             activeSession.clock_out = Date.now();
             console.log("Clock out", activeSession);
             activeSession.total_time = moment.duration(moment(activeSession.clock_out).diff(moment(activeSession.clock_in))).asSeconds();
-            console.log("final", activeSession)
+            console.log("final", activeSession);
             db.session.update(activeSession, {
                 where: {
                     id: activeSession.id
@@ -117,7 +121,7 @@ router.get("/api/tracker/sessions/:startDate/:endDate",
                     }
                 }
             });
-            console.log('result', sessions);
+            console.log("result", sessions);
             res.json(sessions.map(session => session.dataValues)).status(200).send();
         } catch (error) {
             console.error(error);

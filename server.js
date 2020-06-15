@@ -5,7 +5,7 @@ const user = require("./controller/user-controller.js");
 const authorize = require("./controller/auth-controller.js");
 const dashboard = require("./controller/dashboard-controller.js");
 const html = require("./controller/html-routes.js");
-const tracker = require("./controller/tracker-controller.js")
+const tracker = require("./controller/tracker-controller.js");
 
 
 const db = require("./models");
