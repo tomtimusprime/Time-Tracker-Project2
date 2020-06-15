@@ -3,16 +3,16 @@ const displayTime = document.querySelector("#displayTime");
 displayTime.textContent = moment().format("dddd, MMMM DD, YYYY hh:mm A");
 const clockInBtn = document.querySelector("#clock-in");
 const clockOutBtn = document.querySelector("#clock-out");
-const breakBtn = document.querySelector("#break-btn");
 const clockInTimeEl = document.querySelector("#clock-in-time");
 const clockOutTimeEl = document.querySelector("#clock-out-time");
 const currentTimeEl = document.querySelector("#current-time");
 currentTimeEl.textContent = "Current Time: " + moment().format("h:mm:ss A");
 const timeClockedInEl = document.querySelector("#time-clocked-in");
 const todaysEarnings = document.querySelector("#money-earned");
+const sessionTable = $("#session-data");
+
 // const users = require("./users");
 
-let breakTime = false;
 let resumeClockInTime;
 let totalSeconds = 0;
 let start;
@@ -24,23 +24,63 @@ let wage;
 let now = moment();
 displayTimeTimer();
 currentTimeTimer();
+const updateUserData=()=>{
+    return $.get("/api/tracker/user_data").then(function(data) {
+      console.log(data);
+      userData=data;
+    });
+  };
 
 // var minutesPassed = moment().diff(start, 'minutes');
 
+updateUserData().then(()=> {
+    // $.get("/api/tracker/active_session").then((data) => {
+    //     console.log(data);
+    //     if(data) {
+    //         start = moment(data.clock_in);
+    //         totalSeconds = Math.round(moment.duration(moment().diff(start)).asSeconds());
+    //         clockInTimeEl.textContent = "    " + start.format("hh:mm:ss");
+    //         $("#clockedin").addClass("hide")
+    //         $("#clockedout").removeClass("hide");
+    //         displayLapsedTime();
+    //     }
+    // });
+
+    const startToday = moment().startOf('day').toISOString();
+    const endToday = moment().endOf('day').toISOString();
+    $.get(`/api/tracker/sessions/${startToday}/${endToday}`).then((sessions) => {
+        console.log(sessions);
+        sessions.forEach((session)=> {
+            const row = $("<tr>");
+            row.append($(`<td>${moment(session.clock_in).format("hh:mm:ss")}</td>`))
+            if (!session.clock_out) {
+                row.append($(`<td></td>`))
+                row.append($(`<td><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label></td>`))
+                row.append($(`<td><span id="money-earned"></span></td>`))
+            } else {
+                row.append($(`<td>${moment(session.clock_out).format("hh:mm:ss")}</td>`))
+                row.append($(`<td>${session.total_time}</td>`))
+                row.append($(`<td>${session.total_time * userData.wage}</td>`))
+            }
+            sessionTable.append(row)
+
+        })
+    });
+});
 function displayLapsedTime() {
 
     const hoursLabel = document.querySelector("#hours");
     var minutesLabel = document.getElementById("minutes");
     var secondsLabel = document.getElementById("seconds");
-    if (totalSeconds !== 0) {
-        totalSeconds = resumeClockInTime;
-    }
+    // if (totalSeconds !== 0) {
+    //     totalSeconds = resumeClockInTime;
+    // }
     timer = setInterval(setTime, 1000);
 
     function setTime() {
-        if (breakTime === true || clickedClockOut === true) {
-            resumeClockinTime = totalSeconds;
-            console.log(resumeClockInTime);
+        if (clickedClockOut === true) {
+        //     resumeClockinTime = totalSeconds;
+        //     console.log(resumeClockInTime);
             clearInterval(timer);
         }
         ++totalSeconds;
@@ -83,12 +123,8 @@ const addEarnings=(earnings)=>{
     newEarnings=oldEarnings+parseFloat(earnings);
 };
 
-const updateUserData=()=>{
-$.get("/api/tracker/user_data").then(function(data) {
-    console.log(data);
-    userData=data;
-  });
-};
+
+
 
 function displayTimeTimer() {
     timer = setInterval(() => {
@@ -104,22 +140,24 @@ function currentTimeTimer() {
 clockInBtn.addEventListener("click", function (e) {
     updateUserData();
     start = moment();
+    totalSeconds = 0;
     clockInTime = moment().format("hh:mm:ss");
     clockInTimeEl.textContent = "    " + clockInTime;
-    localStorage.setItem("clockIn", moment().format("hh:mm:ss"));
-    clockInBtn.disabled = true;
-    clockOutBtn.disabled = false;
-    breakBtn.disabled = false;
+    $("#clockedin").addClass("hide")
+    $("#clockedout").removeClass("hide");
     displayLapsedTime();
+    $.ajax({
+        url: "/api/tracker/clock_in",
+        type: "PUT",
+    })
 });
 clockOutBtn.addEventListener("click", function (e) {
     updateUserData();
     clockOutTime = moment().format("hh:mm:ss");
-    clockOutTimeEl.textContent = "    " + clockOutTime;
-    localStorage.setItem("clockOut", moment().format("hh:mm:ss"));
+    // clockOutTimeEl.textContent = "    " + clockOutTime;
     clickedClockOut = true;
-    clockInBtn.disabled = false;
-    clockOutBtn.disabled = true;
+    $("#clockedout").addClass("hide")
+    $("#clockedin").removeClass("hide");
     addTime(totalSeconds);
     addEarnings(totalEarnings);
     let newUserData={
@@ -127,17 +165,9 @@ clockOutBtn.addEventListener("click", function (e) {
         total_time: newTime
     };
     $.ajax({
-        url: "/api/tracker/user_data",
+        url: "/api/tracker/clock_out",
         type: "PUT",
-        data: newUserData,
-        success: function(data) {
-          alert("Load was performed.");
-        }
       });
-
-});
-
-breakBtn.addEventListener("click", (e) => {
 
 });
 

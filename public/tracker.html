@@ -46,7 +46,7 @@
     <div class="box1">
       <img src="Assets/Images/european-timepiece-background.jpg" alt="time piece" id="timePiece" /><br>
       <div class="text">
-        <h1>Time Tracker 3000</h1>
+        <h1>Time Tracker</h1>
       </div>
       <p id="time-piece">Background Photos from <a href="https://pngtree.com/free-backgrounds">pngtree.com</a></p>
     </div>
@@ -61,50 +61,61 @@
         <div class="card">
           <div class="card-body">
             <h1 id="current-time" class="text-success"></h1>
-            <h2>Clock In Time: </h2>
-            <p id="clock-in-time"> Clock In Time</p>
-            <button id="clock-in" type="button" class="btn btn-success">Clock In</button>
-            <h2>Clock Out Time: </h2>
-            <p id="clock-out-time"> Clock Out Time</p>
-            <button id="clock-out" type="button" class="btn btn-danger" disabled>Clock Out</button>
-            <br>
-            <h2>Break Time: </h2>
-            <p id="clock-out-time"> Clock Out Time</p>
-            <button id="break-btn" type="button" class="btn btn-warning" disabled>Go On Break</button>
+            
+            <div id="clockedin">
+              <!-- <h2>Clock Out Time: </h2> -->
+              <!-- <p id="clock-out-time"> Clock Out Time</p> -->
+              <button id="clock-in" type="button" class="btn btn-success">Clock In</button>
+            </div>
+
+            <div id="clockedout" class="hide">
+              <h2>Clock In Time: </h2>
+              <p id="clock-in-time"> Clock In Time</p>
+
+              <button id="clock-out" type="button" class="btn btn-danger">Clock Out</button>
+            </div>
+
           </div>
         </div>
       </div>
-      <div class="col sm-2 md-2">
+      <!-- <div class="col sm-2 md-2">
         <div class="card">
           <div class="card-body">
-            <h2>Time Clocked in: </h2>
+            <h2>Time Worked So Far: </h2>
             <span id="time-clocked-in"></span>
             <label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label>
           </div>
         </div>
         <br>
         <div class="row">
-          <div class="col sm-2 md-2">
-            <div class="card">
-              <div class="card-body">
-                <h2>Time Worked Today:</h2>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
             <div class="col sm-2 md-2">
               <div class="card">
                 <div class="card-body">
-                  <h2>Money Earned Today:</h2>
+                  <h2>Money Earned Since Clock-in:</h2>
                   <span id="todays-earnings"></span>
                   <label id="money-earned"></label>
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
+      </div> -->
+    </div>
+
+    <div class="row">
+      <table class="table table-striped table-bordered table-sm" id="session-table">
+        <caption>List of users</caption>
+        <thead>
+          <tr>
+            <th scope="col">Clock In </th>
+            <th scope="col">Clock Out</th>
+            <th scope="col">Total Time</th>
+            <th scope="col">Earnings</th>
+          </tr>
+        </thead>
+        <tbody id="session-data">
+          <!-- Table data gets built here by jQuery -->
+        </tbody>
+      </table>
     </div>
   </div>
   <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/dashboard/">
