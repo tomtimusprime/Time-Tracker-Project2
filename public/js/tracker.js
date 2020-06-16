@@ -24,6 +24,8 @@ let wage;
 let now = moment();
 displayTimeTimer();
 currentTimeTimer();
+
+
 const updateUserData=()=>{
     return $.get("/api/tracker/user_data").then(function(data) {
       console.log(data);
@@ -46,25 +48,25 @@ updateUserData().then(()=> {
     //     }
     // });
 
-    const startToday = moment().startOf('day').toISOString();
-    const endToday = moment().endOf('day').toISOString();
+    const startToday = moment().startOf("day").toISOString();
+    const endToday = moment().endOf("day").toISOString();
     $.get(`/api/tracker/sessions/${startToday}/${endToday}`).then((sessions) => {
         console.log(sessions);
+        // sessionTable.empty();
         sessions.forEach((session)=> {
             const row = $("<tr>");
-            row.append($(`<td>${moment(session.clock_in).format("hh:mm:ss")}</td>`))
+            row.append($(`<td>${moment(session.clock_in).format("hh:mm:ss")}</td>`));
             if (!session.clock_out) {
-                row.append($(`<td></td>`))
-                row.append($(`<td><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label></td>`))
-                row.append($(`<td><span id="money-earned"></span></td>`))
+                row.append($('<td></td>'));
+                row.append($(`<td><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label></td>`));
+                row.append($(`<td><span id="money-earned"></span></td>`));
             } else {
-                row.append($(`<td>${moment(session.clock_out).format("hh:mm:ss")}</td>`))
-                row.append($(`<td>${session.total_time}</td>`))
-                row.append($(`<td>${session.total_time * userData.wage}</td>`))
+                row.append($(`<td>${moment(session.clock_out).format("hh:mm:ss")}</td>`));
+                row.append($(`<td>${session.total_time}</td>`));
+                row.append($(`<td>${session.total_time * userData.wage}</td>`));
             }
-            sessionTable.append(row)
-
-        })
+            sessionTable.append(row);
+        });
     });
 });
 function displayLapsedTime() {
@@ -143,20 +145,20 @@ clockInBtn.addEventListener("click", function (e) {
     totalSeconds = 0;
     clockInTime = moment().format("hh:mm:ss");
     clockInTimeEl.textContent = "    " + clockInTime;
-    $("#clockedin").addClass("hide")
+    $("#clockedin").addClass("hide");
     $("#clockedout").removeClass("hide");
     displayLapsedTime();
     $.ajax({
         url: "/api/tracker/clock_in",
         type: "PUT",
-    })
+    });
 });
 clockOutBtn.addEventListener("click", function (e) {
     updateUserData();
     clockOutTime = moment().format("hh:mm:ss");
     // clockOutTimeEl.textContent = "    " + clockOutTime;
     clickedClockOut = true;
-    $("#clockedout").addClass("hide")
+    $("#clockedout").addClass("hide");
     $("#clockedin").removeClass("hide");
     addTime(totalSeconds);
     addEarnings(totalEarnings);
@@ -168,9 +170,7 @@ clockOutBtn.addEventListener("click", function (e) {
         url: "/api/tracker/clock_out",
         type: "PUT",
       });
-
 });
-
 });
 
 
