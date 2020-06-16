@@ -14,7 +14,23 @@ console.log("On dashboard.js page.");
             "emptyTable": "",
             "infoEmpty": "",
             "info": "",
-        }
+        },
+        "columns": [
+            {"width": "25px"},
+            {"width": "100px"},
+            {"width": "100px"},
+            {"width": "150px"},
+            {"width": "25px"},
+            {"width": "50px"},
+            {"width": "50px"},
+            {"width": "50px"},
+            {"width": "50px"},
+            {"width": "50px"},
+            {"width": "50px"},
+            {"width": "50px"},
+            {"width": "50px"},
+        ]
+
     });
 
  

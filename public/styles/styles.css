@@ -1,6 +1,6 @@
-.list-group-item {
+/* .list-group-item {
   line-height: 2.5;
-}
+} */
 
 body, h2, caption{
   color:#B7410E ;
@@ -70,7 +70,7 @@ img {
   /* display: block; */
   height: 100px;
   overflow: auto;
-  width: 100%;
+  width: 50%;
   color: #B7410E;
 }
 
@@ -87,10 +87,14 @@ th, td {
   display: block;
 }
 
+#dashboard-table.dataTable tbody td {
+  word-break: break-word;
+  vertical-align: top;
+}
+
 .authenticateBtn {
   color: white;
   background-color: #B7410E ;
-  /* border: 25px; */
   border-radius: 4px;
 }
 
