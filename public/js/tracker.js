@@ -58,8 +58,8 @@ updateUserData().then(()=> {
             row.append($(`<td>${moment(session.clock_in).format("hh:mm:ss")}</td>`));
             if (!session.clock_out) {
                 row.append($('<td></td>'));
-                row.append($(`<td><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label></td>`));
-                row.append($(`<td><span id="money-earned"></span></td>`));
+                row.append($('<td><label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label></td>'));
+                row.append($('<td><span id="money-earned"></span></td>'));
             } else {
                 row.append($(`<td>${moment(session.clock_out).format("hh:mm:ss")}</td>`));
                 row.append($(`<td>${session.total_time}</td>`));
